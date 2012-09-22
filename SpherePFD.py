@@ -37,14 +37,13 @@ def pfd_read (r, adj_matrix) :
     if s == "" :
         return False
     l = s.split()
-    num_nodes = int(l[0]) ## number of nodes
-    num_lines = int(l[1]) ## number of lines
+    num_nodes = int(l[0])
+    num_lines = int(l[1])
     assert num_nodes > 0
     assert num_lines >= 0
     
     # Initialize the adjacency matrix to the correct size (filled with 0's)
-    internal_list = [0] * (num_nodes + 1)
-    adj_matrix += [internal_list] * (num_nodes + 1)
+    adj_matrix += [[0 for i in range(num_nodes + 1)] for j in range(num_nodes + 1)]
     
     # Read num_lines lines to generate an adjacency matrix of "rules"
     for i in range(num_lines) :
@@ -66,44 +65,65 @@ def pfd_read (r, adj_matrix) :
 # pfd_eval
 # ------------
 
-# def pfd_eval (adj_matrix) :
-    # """
-    # adj_matrix is the complete (likely unordered) adjacency matrix
-    # return the ordered list of nodes following the precedence rules
-    # """
-    # assert 
-    # # <Your code goes here>
-    # assert 
-    # return ord_list
+def pfd_eval (adj_matrix) :
+    """
+     adj_matrix is the complete (likely unordered) adjacency matrix
+    return the ordered list of nodes following the precedence rules
+    """
+    assert adj_matrix is not None
+    
+    ord_list = []
+    nodes = len(adj_matrix)
+    while len(ord_list) != (nodes - 1) :
+        for node_index in range(1, nodes) :
+            hasPred = False
+            if node_index not in ord_list :
+                for pred_index in range(1, nodes) :
+                    if adj_matrix[node_index][pred_index] == 1 :
+                        hasPred = True
+                        break
+                if not hasPred :
+                    ord_list += [node_index]
+                    for i in range(1, nodes) :
+                        adj_matrix[i][node_index] = 0
+                    break        
+        
+    assert ord_list is not None
+    assert len(ord_list) == nodes-1 
+    
+    return ord_list
 
 # -------------
 # pfd_print
 # -------------
 
 def pfd_print (w, v) :
-    # """
-    # prints the values in v
-    # w is a writer
-    # v is the ordered list of the tasks cast as strings
-    # """
-    w.write(" ".join(v) + "\n")
+    """
+    prints the values in v
+    w is a writer
+    v is the ordered list of the tasks cast as strings
+    """
+    for i in range(0, len(v)) :
+        if i != len(v) - 1 :
+            w.write(str(v[i]) + " ")
+        else :
+            w.write(str(v[i]) + "\n")
 
 # -------------
 # pfd_solve
 # -------------
 
-# def pfd_solve (r, w) :
-    # """
-    # read, eval, print
-    # r is a reader
-    # w is a writer
-    # """
+def pfd_solve (r, w) :
+    """
+    read, eval, print
+    r is a reader
+    w is a writer
+    """
+    adj_matrix = []
+    pfd_read(r, adj_matrix)
+    v = pfd_eval(adj_matrix)
+    pfd_print(w, v)
     
-    # adj_matrix = []
-    # pfd_read(r, adj_matrix)
-    # v = pfd_eval(adj_matrix)
-    # pfd_print(w, v)
-
 # ----
 # main
 # ----

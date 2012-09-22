@@ -20,7 +20,7 @@ To test the program:
 import StringIO
 import unittest
 
-from PFD import pfd_read, pfd_eval, pfd_print#, pfd_solve
+from PFD import pfd_read, pfd_eval, pfd_print, pfd_solve
 
 # -----------
 # TestPFD
@@ -66,16 +66,16 @@ class TestPFD (unittest.TestCase) :
     # # ----
     
     def test_eval_1 (self) :
-    
-        adj_matrix = [([0] * (6))] * (6)
-        adj_matrix[3][1] = 1
-        adj_matrix[3][5] = 1
-        adj_matrix[2][5] = 1
-        adj_matrix[2][3] = 1
-        adj_matrix[4][3] = 1
-        adj_matrix[5][1] = 1
+        al= [[0 for i in range(6)] for j in range(6)]
         
-        ord_list = pfd_eval(adj_matrix)
+        al[3][1] = 1
+        al[3][5] = 1
+        al[2][5] = 1
+        al[2][3] = 1
+        al[4][3] = 1
+        al[5][1] = 1
+            
+        ord_list = pfd_eval(al)
         self.assert_(ord_list[0] == 1)
         self.assert_(ord_list[1] == 5)
         self.assert_(ord_list[2] == 3)                 
@@ -90,14 +90,15 @@ class TestPFD (unittest.TestCase) :
         # v = pfd_eval(201, 210, [0] * 1000000)
         # self.assert_(v == 89)
 
-    # # -----
-    # # print
-    # # -----
+    # -----
+    # print
+    # -----
 
-    # def test_print_1 (self) :
-        # w = StringIO.StringIO()
-        # pfd_print(w, 1, 10, 20)
-        # self.assert_(w.getvalue() == "1 10 20\n")
+    def test_print_1 (self) :
+        w = StringIO.StringIO()
+        v = [1, 5 , 3, 2, 4]
+        pfd_print(w, v)
+        self.assert_(w.getvalue() == "1 5 3 2 4\n")
 		
     # def test_print_2 (self) :
         # w = StringIO.StringIO()
@@ -113,11 +114,11 @@ class TestPFD (unittest.TestCase) :
     # # solve
     # # -----
 
-    # def test_solve_1 (self) :
-        # r = StringIO.StringIO("1 10\n100 200\n201 210\n900 1000\n")
-        # w = StringIO.StringIO()
-        # pfd_solve(r, w)
-        # self.assert_(w.getvalue() == "1 10 20\n100 200 125\n201 210 89\n900 1000 174\n")
+    def test_solve_1 (self) :
+        r = StringIO.StringIO("5 4\n3 2 1 5\n2 2 5 3\n4 1 3\n5 1 1\n")
+        w = StringIO.StringIO()
+        pfd_solve(r, w)
+        self.assert_(w.getvalue() == "1 5 3 2 4\n")
 		
     # def test_solve_2 (self) :
         # r = StringIO.StringIO("5 5\n")
