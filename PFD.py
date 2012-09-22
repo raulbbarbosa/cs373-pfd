@@ -51,7 +51,7 @@ def pfd_read (r, adj_matrix) :
 
 def pfd_eval (adj_matrix) :
     """
-     adj_matrix is the complete (likely unordered) adjacency matrix
+    adj_matrix is the complete (likely unordered) adjacency matrix
     return the ordered list of nodes following the precedence rules
     """
     assert adj_matrix is not None
