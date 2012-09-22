@@ -7,80 +7,41 @@
 # ---------------------------
 
 # ------------
-# pfd_read_f2
-# ------------
-def pfd_read_f2 (r, a) :
-    """
-    reads two ints into a[0] and a[1]
-    r is a  reader
-    a is an array of int
-    return true if that succeeds, false otherwise
-    """
-    s = r.readline()
-    if s == "" :
-        return False
-    l = s.split()
-    a = [0, 0]
-    a[0] = int(l[0]) ## number of nodes
-    a[1] = int(l[1]) ## number of lines
-    assert a[0] > 0
-    assert a[1] > 0
-    return True
-    
-# --------------
-# pfd_read_line
-# --------------
-def pfd_read_line (r, adj_matrix) :
-    """
-    reads two ints into a[0] and a[1]
-    r is a  reader
-    a is an array of int
-    return true if that succeeds, false otherwise
-    """
-    s = r.readline()
-    if s == "" :
-        return False
-    l = s.split()
-    
-    no  
-
-# ------------
 # pfd_read
 # ------------
 
-def pfd_read (r, adjacency_list) :
+def pfd_read (r, adj_matrix) :
     """
-    reads two ints into a[0] and a[1]
-    r is a  reader
-    a is an array of int
-    return true if that succeeds, false otherwise
+    reads and interprets the rules from the input into the adjacency matrix
+    r is a reader
+    adj_matrix is a list
+    return true if the read succeeds, false otherwise
     """
     s = r.readline()
     if s == "" :
         return False
     l = s.split()
-    a = [0, 0]
-    a[0] = int(l[0]) ## number of nodes
-    a[1] = int(l[1]) ## number of lines
-    assert a[0] > 0
-    assert a[1] > 0
+    num_nodes = int(l[0])
+    num_lines = int(l[1])
+    assert num_nodes > 0
+    assert num_lines >= 0
     
-    internal_list = [0] * (a[0]+1)
-    adjacency_list = [internal_list] * (a[0]+1)
+    # Initialize the adjacency matrix to the correct size (filled with 0's)
+    adj_matrix += [([0] * (num_nodes + 1))] * (num_nodes + 1)
     
-    ##we have to read a[1] lines
-    for i in range(a[1]) :
-           
+    # Read num_lines lines to generate an adjacency matrix of "rules"
+    for i in range(num_lines) :
         s = r.readline()
         if s == "" :
             return False
         l = s.split()
-        node = l[0]   
-        n_predec = l[1]
-        
-        for j in range(2,n_predec+2) :
-            node_to = l[j] 
-            adjacency_list[node][node_to] = 1
+        node = int(l[0])
+        num_pred = int(l[1])
+        assert node > 0
+        assert num_pred > 0
+        for j in range(2, num_pred + 2) :
+            pred_node = int(l[j])
+            adj_matrix[node][pred_node] = 1
            
     return True
 
@@ -88,46 +49,58 @@ def pfd_read (r, adjacency_list) :
 # pfd_eval
 # ------------
 
-def pfd_eval (i, j, c) :
+def pfd_eval (adj_matrix) :
     """
-    i is the beginning of the range, inclusive
-    j is the end       of the range, inclusive
-    c is the cache for previously calculate cycle lengths
-    return the max cycle length in the range [i, j]
+     adj_matrix is the complete (likely unordered) adjacency matrix
+    return the ordered list of nodes following the precedence rules
     """
-    assert i > 0
-    assert j > 0
-    # <Your code goes here>
-    assert high > 0
-    return high
+    assert adj_matrix is not None
+    
+    ord_list = []
+    nodes = len(adj_matrix)
+    while len(ord_list) != (nodes - 1) :
+        for node_index in range(1, nodes) :
+            hasPred = False
+            for pred_index in range(1, nodes) :
+                if adj_matrix[node_index][pred_index] == 1 :
+                    hasPred = True
+                    break
+            if not hasPred :
+                ord_list += node_index
+                for i in range(1, nodes) :
+                    adj_matrix[i][node_index] = 0
+                break        
+    
+    assert ord_list is not None
+    assert len(ord_list) == nodes-1 
+    
+    return ord_list
 
 # -------------
 # pfd_print
 # -------------
 
-def pfd_print (w, i, j, v) :
-    """
-    prints the values of i, j, and v
-    w is a writer
-    i is the beginning of the range, inclusive
-    j is the end       of the range, inclusive
-    v is the max cycle length
-    """
-    w.write(str(i) + " " + str(j) + " " + str(v) + "\n")
+def pfd_print (w, v) :
+    # """
+    # prints the values in v
+    # w is a writer
+    # v is the ordered list of the tasks cast as strings
+    # """
+    w.write(" ".join(v) + "\n")
 
 # -------------
 # pfd_solve
 # -------------
 
-def pfd_solve (r, w) :
-    """
-    read, eval, print loop
-    r is a reader
-    w is a writer
-    """
+# def pfd_solve (r, w) :
+    # """
+    # read, eval, print
+    # r is a reader
+    # w is a writer
+    # """
     
-    adjacent_list = []
-    collatz_read(r, adjacent_list) :
-        v = collatz_eval()
-        collatz_print(w, )
-        
+    # adj_matrix = []
+    # pfd_read(r, adj_matrix)
+    # v = pfd_eval(adj_matrix)
+    # pfd_print(w, v)
+    
