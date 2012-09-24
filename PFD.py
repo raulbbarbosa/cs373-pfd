@@ -39,7 +39,6 @@ def pfd_read (r, adj_matrix) :
         if s == "" :
             return False
         l = s.split()
-        print l[0]
         node = int(l[0])
         num_pred = int(l[1])
         assert node > 0

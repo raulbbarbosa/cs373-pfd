@@ -117,7 +117,7 @@ class TestPFD (unittest.TestCase) :
         w = StringIO.StringIO()
         v = [1, 5, 3, 2, 4]
         pfd_print(w, v)
-        self.assert_(w.getvalue() == "1 5 3 2 4\n")
+        self.assert_(w.getvalue() == "1 5 3 2 4\n\n")
 		
     def test_print_2 (self) :
         w = StringIO.StringIO()
@@ -127,12 +127,12 @@ class TestPFD (unittest.TestCase) :
     def test_print_3 (self) :
         w = StringIO.StringIO()
         pfd_print(w, [1])
-        self.assert_(w.getvalue() == "1\n")
+        self.assert_(w.getvalue() == "1\n\n")
         
     def test_print_4 (self) :
         w = StringIO.StringIO()
         pfd_print(w, [1, 2, 3, 4, 5])
-        self.assert_(w.getvalue() == "1 2 3 4 5\n")
+        self.assert_(w.getvalue() == "1 2 3 4 5\n\n")
 
     # # -----
     # # solve
@@ -142,19 +142,19 @@ class TestPFD (unittest.TestCase) :
         r = StringIO.StringIO("5 4\n3 2 1 5\n2 2 5 3\n4 1 3\n5 1 1\n")
         w = StringIO.StringIO()
         pfd_solve(r, w)
-        self.assert_(w.getvalue() == "1 5 3 2 4\n")
+        self.assert_(w.getvalue() == "1 5 3 2 4\n\n")
 		
     def test_solve_2 (self) :
         r = StringIO.StringIO("1 0\n")
         w = StringIO.StringIO()
         pfd_solve(r, w)
-        self.assert_(w.getvalue() == "1\n")
+        self.assert_(w.getvalue() == "1\n\n")
 		
     def test_solve_3 (self) :
         r = StringIO.StringIO("5 4\n2 1 1\n3 1 2\n4 1 3\n5 1 4\n")
         w = StringIO.StringIO()
         pfd_solve(r, w)
-        self.assert_(w.getvalue() == "1 2 3 4 5\n")
+        self.assert_(w.getvalue() == "1 2 3 4 5\n\n")
 
 # ----
 # main
