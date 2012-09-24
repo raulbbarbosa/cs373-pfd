@@ -39,4 +39,4 @@ for i in range(100) :
                 parent_list.append(child)
     output += str(ruleCount) + "\n"
     output += rulesOut + "\n"
-print output ,
+    print output ,
