@@ -107,7 +107,7 @@ def pfd_print (w, v) :
         if i != (len(v) - 1) :
             w.write(str(v[i]) + " ")
         else :
-            w.write(str(v[i]) + "\n")
+            w.write(str(v[i]) + "\n\n")
 
 # -------------
 # pfd_solve

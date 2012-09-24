@@ -20,6 +20,10 @@ def pfd_read (r, adj_matrix) :
     s = r.readline()
     if s == "" :
         return False
+    elif s == "\n" :
+       s = r.readline()
+       if s == "" :
+           return False
     l = s.split()
     num_nodes = int(l[0])
     num_lines = int(l[1])
@@ -35,6 +39,7 @@ def pfd_read (r, adj_matrix) :
         if s == "" :
             return False
         l = s.split()
+        print l[0]
         node = int(l[0])
         num_pred = int(l[1])
         assert node > 0
@@ -103,7 +108,10 @@ def pfd_solve (r, w) :
     r is a reader
     w is a writer
     """
-    adj_matrix = []
-    pfd_read(r, adj_matrix)
-    v = pfd_eval(adj_matrix)
-    pfd_print(w, v)
+    while True :
+        adj_matrix = []
+        if not pfd_read(r, adj_matrix) :
+            break
+        v = pfd_eval(adj_matrix)
+        pfd_print(w, v)
+    
