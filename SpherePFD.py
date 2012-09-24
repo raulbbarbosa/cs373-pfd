@@ -67,7 +67,7 @@ def pfd_read (r, adj_matrix) :
 
 def pfd_eval (adj_matrix) :
     """
-     adj_matrix is the complete (likely unordered) adjacency matrix
+    adj_matrix is the complete (likely unordered) adjacency matrix
     return the ordered list of nodes following the precedence rules
     """
     assert adj_matrix is not None
@@ -89,7 +89,7 @@ def pfd_eval (adj_matrix) :
                     break        
         
     assert ord_list is not None
-    assert len(ord_list) == nodes-1 
+    assert len(ord_list) == (nodes - 1) 
     
     return ord_list
 
@@ -104,7 +104,7 @@ def pfd_print (w, v) :
     v is the ordered list of the tasks cast as strings
     """
     for i in range(0, len(v)) :
-        if i != len(v) - 1 :
+        if i != (len(v) - 1) :
             w.write(str(v[i]) + " ")
         else :
             w.write(str(v[i]) + "\n")
