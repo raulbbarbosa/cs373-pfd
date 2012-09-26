@@ -9,14 +9,14 @@ Last Name: Johnson
 EID: dmj559
 E-mail: dmnjohns@gmail.com
 Estimated number of hours: 6 hours
-Actual number of hours:
+Actual number of hours: 8.5 hours
 
 Partner First Name: Raul	
 Partner Last Name: Bezerra Barbosa
 Partner EID: rb35468
 Partner E-mail: raulbbarbosa@gmail.com
 Partner Estimated number of hours: 10 hours
-Partner Actual number of hours: 
+Partner Actual number of hours: 8.5 hours
 
 Turnin CS Username: dmnjohns
 GitHub ID: dmnjohns

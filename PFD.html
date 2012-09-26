@@ -16,22 +16,37 @@
 #&nbsp;---------------------------</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="heapq.html">heapq</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-pfd_eval"><strong>pfd_eval</strong></a>(adj_matrix)</dt><dd><tt>&nbsp;adj_matrix&nbsp;is&nbsp;the&nbsp;complete&nbsp;(likely&nbsp;unordered)&nbsp;adjacency&nbsp;matrix<br>
+<td width="100%"><dl><dt><a name="-pfd_eval"><strong>pfd_eval</strong></a>(adj_list, heap, tuple_dict)</dt><dd><tt>adj_list&nbsp;is&nbsp;a&nbsp;predecessor&nbsp;dictionary&nbsp;<br>
 return&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes&nbsp;following&nbsp;the&nbsp;precedence&nbsp;rules</tt></dd></dl>
  <dl><dt><a name="-pfd_print"><strong>pfd_print</strong></a>(w, v)</dt><dd><tt>prints&nbsp;the&nbsp;values&nbsp;in&nbsp;v<br>
 w&nbsp;is&nbsp;a&nbsp;writer<br>
 v&nbsp;is&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;the&nbsp;tasks&nbsp;cast&nbsp;as&nbsp;strings</tt></dd></dl>
- <dl><dt><a name="-pfd_read"><strong>pfd_read</strong></a>(r, adj_matrix)</dt><dd><tt>reads&nbsp;and&nbsp;interprets&nbsp;the&nbsp;rules&nbsp;from&nbsp;the&nbsp;input&nbsp;into&nbsp;the&nbsp;adjacency&nbsp;matrix<br>
+ <dl><dt><a name="-pfd_read"><strong>pfd_read</strong></a>(r, adj_list, heap, tuple_dict)</dt><dd><tt>reads&nbsp;and&nbsp;interprets&nbsp;the&nbsp;rules&nbsp;from&nbsp;the&nbsp;input&nbsp;into&nbsp;the&nbsp;adjacency&nbsp;list,&nbsp;heap&nbsp;and&nbsp;a&nbsp;tuples&nbsp;dictionary&nbsp;(used&nbsp;to&nbsp;retrieve&nbsp;heap&nbsp;entries)&nbsp;<br>
 r&nbsp;is&nbsp;a&nbsp;reader<br>
-adj_matrix&nbsp;is&nbsp;a&nbsp;list<br>
+adj_list&nbsp;is&nbsp;a&nbsp;dictionary<br>
 return&nbsp;true&nbsp;if&nbsp;the&nbsp;read&nbsp;succeeds,&nbsp;false&nbsp;otherwise</tt></dd></dl>
  <dl><dt><a name="-pfd_solve"><strong>pfd_solve</strong></a>(r, w)</dt><dd><tt>read,&nbsp;eval,&nbsp;print<br>
 r&nbsp;is&nbsp;a&nbsp;reader<br>
 w&nbsp;is&nbsp;a&nbsp;writer</tt></dd></dl>
-</td></tr></table>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>REMOVED</strong> = True</td></tr></table>
 </body></html>

@@ -1,0 +1,65 @@
+commit 78ca79bf1cddbd95b205a0ec6cb72c0b7950c350
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Wed Sep 26 14:19:04 2012 -0500
+
+    PriorityQueue Implemented, Sphere Accepted, close #11 #14 #1 #2 #5 #6
+
+commit a30faf887ed75982dd5afe19406b9f04b1cd14ef
+Author: Raul <raul@ubuntu.(none)>
+Date:   Wed Sep 26 00:17:21 2012 -0500
+
+    Ran out of time, trying to implement priority queue
+
+commit fb067414862edbbb62991aede9c74237723de18f
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Mon Sep 24 15:13:53 2012 -0500
+
+    Corrected output formatting, out of time
+
+commit d7e80ceaca5c2370588cf2da189389ed3fd64469
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Mon Sep 24 14:52:53 2012 -0500
+
+    PFD.py now accepts multiple test cases, fixes #15
+
+commit 49376073034c2a31e04b247d556047d03c473867
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Mon Sep 24 02:50:09 2012 -0500
+
+    Preparing RunPFD/PFD to take multiple inputs for acceptance testing, out of time
+
+commit 884a6837fb9e75b2e88ab9a5053db167251f607e
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Sun Sep 23 21:00:59 2012 -0500
+
+    Implemented generate-acc-tests to generate acceptance tests and generated a test file, fixes #16
+
+commit 922198681309cfe74e1e3f87e992c87a7d61a2ca
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Sat Sep 22 17:23:23 2012 -0500
+
+    End of time commit
+
+commit 027739d5e5c076dab460720369cfd7c196c3a60a
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Sat Sep 22 16:23:54 2012 -0500
+
+    First accepted solution, using adjacency matrix. closes #10
+
+commit d81747759f672a42c676e70ed793bf0805a0bb1d
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Sat Sep 22 14:50:42 2012 -0500
+
+    Read function implemented, eval function not working
+
+commit 5d2f00cd1923c0d3a73ee573c6fac3efa0f4ada9
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Wed Sep 19 15:27:30 2012 -0500
+
+    Add skeleton, working on read function, out of time
+
+commit 441dedac9c9a7803f4bec71853e858d77078a136
+Author: Damien Johnson <dmn.johns@gmail.com>
+Date:   Wed Sep 19 14:19:36 2012 -0500
+
+    First commit, setting the repo
