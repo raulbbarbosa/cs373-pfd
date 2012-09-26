@@ -21,12 +21,15 @@ To document the program
 # -------
 
 import sys
+import heapq
+
+REMOVED = True
 
 # ------------
 # pfd_read
 # ------------
 
-def pfd_read (r, adj_matrix) :
+def pfd_read (r, adj_matrix, heap, tuple_dict) :
     """
     reads and interprets the rules from the input into the adjacency matrix
     r is a reader
@@ -36,6 +39,8 @@ def pfd_read (r, adj_matrix) :
     s = r.readline()
     if s == "" :
         return False
+    elif s == "\n" :
+        return pfd_read(r, adj_matrix, heap, tuple_dict)
     l = s.split()
     num_nodes = int(l[0])
     num_lines = int(l[1])
@@ -44,7 +49,8 @@ def pfd_read (r, adj_matrix) :
     
     # Initialize the adjacency matrix to the correct size (filled with 0's)
     adj_matrix += [[0 for i in range(num_nodes + 1)] for j in range(num_nodes + 1)]
-    
+    free_node = [1 for i in range(num_nodes + 1)]
+        		 
     # Read num_lines lines to generate an adjacency matrix of "rules"
     for i in range(num_lines) :
         s = r.readline()
@@ -55,9 +61,18 @@ def pfd_read (r, adj_matrix) :
         num_pred = int(l[1])
         assert node > 0
         assert num_pred > 0
+        tuple_dict[node] = [num_pred, node]       	
+        heapq.heappush(heap, tuple_dict[node])
+        free_node[node] = 0
         for j in range(2, num_pred + 2) :
             pred_node = int(l[j])
             adj_matrix[node][pred_node] = 1
+    
+    for i in range(1, num_nodes + 1) :
+        if free_node[i] == 1 :
+            tuple_dict[i] = [0, i]
+            heapq.heappush(heap, tuple_dict[i])
+            # free_node[node] = 0
            
     return True
 
@@ -65,7 +80,7 @@ def pfd_read (r, adj_matrix) :
 # pfd_eval
 # ------------
 
-def pfd_eval (adj_matrix) :
+def pfd_eval (adj_matrix, heap, tuple_dict) :
     """
     adj_matrix is the complete (likely unordered) adjacency matrix
     return the ordered list of nodes following the precedence rules
@@ -74,20 +89,21 @@ def pfd_eval (adj_matrix) :
     
     ord_list = []
     nodes = len(adj_matrix)
-    while len(ord_list) != (nodes - 1) :
-        for node_index in range(1, nodes) :
-            hasPred = False
-            if node_index not in ord_list :
-                for pred_index in range(1, nodes) :
-                    if adj_matrix[node_index][pred_index] == 1 :
-                        hasPred = True
-                        break
-                if not hasPred :
-                    ord_list += [node_index]
-                    for i in range(1, nodes) :
-                        adj_matrix[i][node_index] = 0
-                    break        
-        
+    while True :
+        try :
+            current_node = heapq.heappop(heap)
+            if current_node[-1] is REMOVED : continue
+        except IndexError:
+            break
+        node_index = current_node[1]
+        ord_list += [node_index]
+        for i in range(1, nodes) :
+            if adj_matrix[i][node_index] == 1 :
+                #tuple_dict[i][0] -=  1
+                tuple_dict[i][-1] = REMOVED
+                tuple_dict[i] = [tuple_dict[i][0]-1, i]
+                heapq.heappush(heap, tuple_dict[i])            
+         
     assert ord_list is not None
     assert len(ord_list) == (nodes - 1) 
     
@@ -119,10 +135,14 @@ def pfd_solve (r, w) :
     r is a reader
     w is a writer
     """
-    adj_matrix = []
-    pfd_read(r, adj_matrix)
-    v = pfd_eval(adj_matrix)
-    pfd_print(w, v)
+    while True :
+        adj_matrix = []
+        heap = []
+        tuple_dict = {}
+        if not pfd_read(r, adj_matrix, heap, tuple_dict) :
+            break
+        v = pfd_eval(adj_matrix, heap, tuple_dict)
+        pfd_print(w, v)
     
 # ----
 # main

@@ -8,6 +8,8 @@
 
 import heapq
 
+REMOVED = True
+
 # ------------
 # pfd_read
 # ------------
@@ -73,22 +75,20 @@ def pfd_eval (adj_matrix, heap, tuple_dict) :
     ord_list = []
     nodes = len(adj_matrix)
     while True :
-	try :
-	    current_node = heapq.heappop(heap)    
+        try :
+            current_node = heapq.heappop(heap)
+            if current_node[-1] is REMOVED : continue
         except IndexError:
             break
         node_index = current_node[1]
         ord_list += [node_index]
         for i in range(1, nodes) :
             if adj_matrix[i][node_index] == 1 :
-                 tuple_dict[i][0] -=  1 
-		 print heap[node_index]  
-            adj_matrix[i][node_index] = 0
-            
-            #update the values
-                 
-                
-
+                #tuple_dict[i][0] -=  1
+                tuple_dict[i][-1] = REMOVED
+                tuple_dict[i] = [tuple_dict[i][0]-1, i]
+                heapq.heappush(heap, tuple_dict[i])            
+         
     assert ord_list is not None
     assert len(ord_list) == (nodes - 1) 
     
